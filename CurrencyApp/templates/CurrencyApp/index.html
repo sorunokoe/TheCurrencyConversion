@@ -1,0 +1,82 @@
+
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <title>TheCurrencyConversion</title>
+    <meta name="description" content="Awesome App for convert currencies.">
+</head>
+<body ng-app="app" ng-controller="indexController">
+
+{% include "heade.html" %}
+
+    <div class="body">
+        <section>
+          <div class="intro">
+              <h1><span class="logo-name">The Currency <br/> Conversion</span><br> beta</h1>
+          </div>
+            <div class="description">
+                <p>
+                    Awesome App for convert currencies. Based on Python/Django, Angular.
+                    <br/>
+                    API:
+                    <a href="https://openexchangerates.org" target="_blank">
+                        https://openexchangerates.org
+                    </a>
+                </p>
+            </div>
+        </section>
+        <section>
+          <div class="persuation">
+
+              <p ng-click="choosed(currency)" ng-repeat="currency in allcurrencies" ng-class="{'active':currency.choosed}">
+                  <span ng-bind="currency.code"></span>
+              </p>
+          </div>
+        </section>
+
+
+        <section>
+            <div class="currency-app-div ng-cloak">
+                <div class="settings-div">
+                    <form ng-submit="convert()">
+                        <input type="number" ng-model="currency.amount" placeholder="Amount..">
+                        <div class="space-20"></div>
+                        <select ng-model="currency.targetCurrency" ng-change="changeTargetCurrency()">
+                            <option value="[[currency.code]]" ng-bind="currency.code" ng-hide="currency.choosed" ng-repeat="currency in allcurrencies"></option>
+                        </select>
+                        <div class="space-20"></div>
+                        <p ng-show="currency.targetCurrency">
+                            1 <span ng-bind="choosedCurrency.code"></span>
+                            -
+                            <span ng-bind="currency.rate"></span> <span ng-bind="currency.sign"></span>
+                        </p>
+                        <div class="space-20"></div>
+                        <button type="submit">Convert</button>
+                    </form>
+                </div>
+                <div class="interface-div">
+                    <p class="result-div">
+                        <span ng-bind="result"></span>
+                        <span ng-bind="sign"></span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+
+    </div>
+
+    <!-- END OF 'body' div -->
+
+
+
+{% include "footer.html" %}
+<script type="text/javascript"  src="{% static 'js/index.js' %}"></script>
+
+
+
+{% endblock content %}

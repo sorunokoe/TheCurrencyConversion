@@ -1,0 +1,19 @@
+User-agent: *
+Disallow: /*.pdf
+Disallow: /*.ppt
+Disallow: /*.doc
+Disallow: /*.xls
+Disallow: /*.txt
+Disallow: /*.mp3
+Disallow: /*.mp4
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 3
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 3
+
+Host: http://localhost:8000
+Sitemap: http://localhost:8000/static/files/sitemap.xml
